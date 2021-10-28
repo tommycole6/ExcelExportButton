@@ -20,7 +20,7 @@ The most basic example to give the user a full featured selection dialog is
 <comp:ExcelExportButton listBaseID="theList" showSelectionDialog="true"/>
 ```
 
-An example that genertes an automatic Excel with specific properties exported:
+An example that generates an automatic Excel with specific properties exported:
 
 ```XML
 <comp:ExcelExportButton listBaseID="theList">
