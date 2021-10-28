@@ -25,9 +25,9 @@ An example that generates an automatic Excel with specific properties exported:
 ```XML
 <comp:ExcelExportButton listBaseID="theList">
   <comp:properties>
-    <comp:ExcelExportProperty label="First Name" value="firstName" type="sap.ui.export.EdmType.String"/>
-    <comp:ExcelExportProperty label="Last Name" value="lastName" type="sap.ui.export.EdmType.String"/>
-    <comp:ExcelExportProperty label="Date of Birth" value="dob" type="sap.ui.export.EdmType.String"/>
+    <comp:ExcelExportProperty label="First Name" value="firstName" type="String"/>
+    <comp:ExcelExportProperty label="Last Name" value="lastName" type="String"/>
+    <comp:ExcelExportProperty label="Date of Birth" value="dob" type="String"/>
   </comp:properties>
 </comp:ExcelExportButton>
 ```
