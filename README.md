@@ -35,3 +35,17 @@ An example that genertes an automatic Excel with specific properties exported:
 Additional documentation and examples can be found in the [ExcelExportButton.pdf](https://github.com/tommycole6/ExcelExportButton/blob/main/Excel%20Export%20Button.pdf).
 
 *NOTE*:This utilities utilizes the sap.ui.export package (specifically the [sap.ui.export.Spreadsheet](https://sapui5.hana.ondemand.com/#/api/sap.ui.export.Spreadsheet) and [sap.ui.export.EdmType](https://sapui5.hana.ondemand.com/#/api/sap.ui.export.EdmType) and therefore requires use of the SAPUI5 library version 1.50.0 or later. This item is not compatible with OpenUI5.
+
+## To Use In Your SAPUI5/Fiori Application
+1. Copy the [ExcelExportButton.js](https://github.com/tommycole6/ExcelExportButton/blob/main/ExcelExportButton.js) and [ExcelExportProperty.js](https://github.com/tommycole6/ExcelExportButton/blob/main/ExcelExportProperty.js) files to your project. It is recommended that you place them in a subfolder (i.e. components)
+2. For XML views, add a new namespace that points to the folder
+   ```XML
+   <core:View
+         ...
+         xmmlns:comp="my.namespace.components">
+   ```
+3. Add the ExcelExportButton to your XML view
+   ```XML
+   <comp:ExcelExportButton listBaseID="theList"/>
+   ```
+      
