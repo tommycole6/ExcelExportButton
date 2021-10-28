@@ -27,7 +27,7 @@ sap.ui.define([
    * @constructor
    * @public
    */
-  var ExcelExportButton = Button.extend(basePackage + ".components.ExcelExportButton", {
+  var ExcelExportButton = Button.extend("ExcelExportButton", {
 	  metadata: {
 		properties: {
 			/**
