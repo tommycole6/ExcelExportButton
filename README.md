@@ -33,3 +33,5 @@ An example that genertes an automatic Excel with specific properties exported:
 ```
     
 Additional documentation and examples can be found in the [ExcelExportButton.pdf](https://github.com/tommycole6/ExcelExportButton/blob/main/Excel%20Export%20Button.pdf).
+
+*NOTE*:This utilities utilizes the sap.ui.export package (specifically the [sap.ui.export.Spreadsheet](https://sapui5.hana.ondemand.com/#/api/sap.ui.export.Spreadsheet) and [sap.ui.export.EdmType](https://sapui5.hana.ondemand.com/#/api/sap.ui.export.EdmType) and therefore requires use of the SAPUI5 library version 1.50.0 or later. This item is not compatible with OpenUI5.
