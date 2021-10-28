@@ -32,4 +32,4 @@ An example that genertes an automatic Excel with specific properties exported:
 </comp:ExcelExportButton>
 ```
     
-Additional documentation and examples can be found in the ExcelExportButton.pdf.
+Additional documentation and examples can be found in the [ExcelExportButton.pdf](https://github.com/tommycole6/ExcelExportButton/blob/main/Excel%20Export%20Button.pdf).
