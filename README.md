@@ -3,7 +3,7 @@ The ExcelExportButton is a custom SAPUI5 control that extends [sap.m.Button](htt
 from any [sap.m.ListBase](https://sapui5.hana.ondemand.com/#/api/sap.m.ListBase) element into a compliant Microsoft Excel Spreadsheet.. It has the ability to perform a pre-defined
 automatic download to Excel, or provide the user with a selection dialog that allows them to select which properties / rows to export.
 
-The only requirement is that:
+The only requirements are that:
 1. There is an element in the same view that extends [sap.m.ListBase](https://sapui5.hana.ondemand.com/#/api/sap.m.ListBase)
 2. The ID of this element is defined in the ExcelExportButton's only required property 'listBaseID'. 
    If this element cannot be found in the view, or is not a [sap.m.ListBase](https://sapui5.hana.ondemand.com/#/api/sap.m.ListBase), the button will be hidden.
