@@ -87,11 +87,11 @@ sap.ui.define([
 				selectDefinedProperties: { type: "boolean", defaultValue: true },
 				/**
 				 * Indicates if defined properties should be highlighted.<br/>
-				 * <b>NOTE:</b> If <code>showSelectionDialog</code> is set to false, this property is ignored. 
+				 * <b>NOTE:</b> If <code>showSelectionDialog</code> is set to false or showOnlyDefinedProperties is set to true, this property is ignored. 
 				 */
 				highlightDefinedProperties: { type: "boolean", defaultValue: false },
 				/**
-				 * Indicates if the property names should be displayed below the property label.
+				 * Indicates if the property names should be displayed below the property label.<br/>
 				 * <b>NOTE:</b> If <code>showSelectionDialog</code> is set to false, this property is ignored.
 				 */
 				showPropertyNames : { type: "boolean", defaultValue: false },
@@ -101,17 +101,17 @@ sap.ui.define([
 				 */
 				sortProperties : { type: "boolean", defaultValue: true },
 				/**
-				 * Sets the text on the close/cancel button.
+				 * Sets the text on the selection dialog close/cancel button.<br/>
 				 * <b>NOTE:</b> If <code>showSelectionDialog</code> is set to false, this property is ignored.
 				 */
 				closeButtonText: { type: "string", defaultValue: "Cancel"},
 				/**
-				 * Sets the icon on the close/cancel button.
+				 * Sets the icon on the selection dialog close/cancel button.<br/>
 				 * <b>NOTE:</b> If <code>showSelectionDialog</code> is set to false, this property is ignored.
 				 */
-				closeButtonIcon: { type: "string", defaultValue: "sap-icon://sys-cancel"},
+				closeButtonIcon: { type: "string", defaultValue: "sap-icon://decline"},
 				/**
-				 * Sets the title for the selection dialog.
+				 * Sets the title for the selection dialog.<br/>
 				 * <b>NOTE:</b> If <code>showSelectionDialog</code> is set to false, this property is ignored.
 				 */
 				dialogTitle: { type: "string", defaultValue: "Select Values to Export"}
@@ -119,9 +119,20 @@ sap.ui.define([
 			defaultAggregation : "values",
 			aggregations: {
 				/**
-				 * Defines the list of properties to include in the Export. If <code>showSelectionDialog</code> is set to true and <code>showOnlyDefinedProperties</code>
-				 * is set to false, the user will have the ability to select and export additional properties as defined in the data objects from the associated
-				 * sap.ui.ListBase control's model.
+				 * Defines the list of properties to include in the Export. How the button will use this aggregation varies depending on various settings.
+				 * If <code>showSelectionDialog</code> is set to false then:<br/>
+				 * <blockquote>If <code>exportAllColumns</code> is set to false, then only the properties defined in this aggregation will be exported,
+				 * and for each property defined, the given label will be used as the column header.<br/>
+				 * If <code>exportAllColumns</code> is set to true, then all properties discovered will be exported and properties defined in this aggregation
+				 * will use the label as it's column header, properties not in this aggregation will have a generated label that attempts to make a human
+				 * readable word case label based on the property's name.</blockquote>
+				 * If <code>showSelectionDialog</code> is set to true then:<br/>
+				 * <blockquote>
+				 * If <code>exportAllColumns</code> is set to false, then only the properties defined in this aggregation will be shown in the selection dialog,
+				 * and for each property defined, the given label will be used as the column header.<br/>
+				 * If <code>exportAllColumns</code> is set to true, then all properties discovered will be shown in the selection dialog and properties defined 
+				 * in this aggregation will use the label as it's column header, properties not in this aggregation will have a generated label that attempts 
+				 * to make a human readable word case label based on the property's name.</blockquote>
 				 */
 				properties: { type : "ExcelExportProperty", multiple : true, singularName : "property" }
 			}
@@ -315,14 +326,16 @@ sap.ui.define([
 									content: [
 										new sap.m.CheckBox(theButtonId, {
 											text: "Select All (" + aProperties.properties.length + ")",
-											valueState: (that.getHighlightDefinedProperties()) ? "Information" : "None",
+											tooltip: ((! that.getShowOnlyDefinedProperties()) && that.getHighlightDefinedProperties()) ? "Discovered properties" : "",
+											valueState: ((! that.getShowOnlyDefinedProperties()) && that.getHighlightDefinedProperties()) ? "Information" : "None",
 													select: function(oEvent) {
 														that._toggleAllProperties(this);
 													}
 										}),
 										new sap.m.CheckBox(theButtonId2, {
 											text: "Select Defaults (" + that.getProperties().length + ")",
-											valueState: (that.getHighlightDefinedProperties()) ? "Success" : "None",
+											tooltip: ((! that.getShowOnlyDefinedProperties()) && that.getHighlightDefinedProperties()) ? "Default properties" : "",
+											valueState: ((! that.getShowOnlyDefinedProperties()) && that.getHighlightDefinedProperties()) ? "Success" : "None",
 													select: function(oEvent) {
 														that._toggleDefinedProperties(this);
 													}
@@ -391,15 +404,17 @@ sap.ui.define([
 								for (let j = 0; j < that.getProperties().length; j++) {
 									if (that.getProperties()[j].getValue() === theObject.description) {
 										theItem.setSelected(true);
-										if (that.getHighlightDefinedProperties()) {
+										if (that.getHighlightDefinedProperties() && (! that.getShowOnlyDefinedProperties())) {
 											theItem.setHighlight("Success");
 											theItem.setHighlightText("Default property");
+											theItem.setTooltip("Default property");
 										}
 										break;
 									}
-									else if (that.getHighlightDefinedProperties()) {
+									else if (that.getHighlightDefinedProperties() && (! that.getShowOnlyDefinedProperties())) {
 										theItem.setHighlight("Information");
 										theItem.setHighlightText("Discovered property");
+										theItem.setTooltip("Discovered property");
 									}
 								}
 							}
